@@ -4,8 +4,8 @@
 
 ```
 ╔══════════════════════════════════════╗
-║           s p a r k l i n e         ║
-║    TensorBoard in your terminal     ║
+║           s p a r k l i n e          ║
+║    TensorBoard in your terminal      ║
 ╚══════════════════════════════════════╝
 ```
 
