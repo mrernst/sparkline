@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "asciitensorboard"
+version = "0.1.0"
+description = "View TensorBoard and W&B training metrics directly in your terminal"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.8"
+authors = [{ name = "asciitensorboard contributors" }]
+keywords = ["tensorboard", "wandb", "terminal", "training", "metrics", "plotting", "ascii"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Utilities",
+]
+
+dependencies = [
+    "plotext>=5.2.8",
+    "click>=8.0",
+    "rich>=13.0",
+    "tensorboard>=2.0",
+    "numpy>=1.20",
+]
+
+[project.optional-dependencies]
+wandb = ["wandb>=0.16"]
+all = ["wandb>=0.16"]
+dev = ["pytest", "black", "ruff", "mypy"]
+
+[project.scripts]
+asciitb = "asciitensorboard.cli:main"
+asciitensorboard = "asciitensorboard.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/example/asciitensorboard"
+Issues = "https://github.com/example/asciitensorboard/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["asciitensorboard*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py38"
+
+[tool.black]
+line-length = 100
+target-version = ["py38"]
