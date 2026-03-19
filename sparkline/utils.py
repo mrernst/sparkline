@@ -12,7 +12,7 @@ from typing import List, Optional
 # Logger
 # ---------------------------------------------------------------------------
 
-logger = logging.getLogger("asciitensorboard")
+logger = logging.getLogger("sparkline")
 
 
 def setup_logging(verbose: bool = False) -> None:

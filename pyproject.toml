@@ -1,15 +1,15 @@
 [build-system]
 requires = ["setuptools>=68", "wheel"]
-build-backend = "setuptools.backends.legacy:build"
+build-backend = "setuptools.build_meta"
 
 [project]
-name = "asciitensorboard"
+name = "sparkline"
 version = "0.1.0"
 description = "View TensorBoard and W&B training metrics directly in your terminal"
 readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.8"
-authors = [{ name = "asciitensorboard contributors" }]
+authors = [{ name = "sparkline contributors" }]
 keywords = ["tensorboard", "wandb", "terminal", "training", "metrics", "plotting", "ascii"]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -41,16 +41,15 @@ all = ["wandb>=0.16"]
 dev = ["pytest", "black", "ruff", "mypy"]
 
 [project.scripts]
-asciitb = "asciitensorboard.cli:main"
-asciitensorboard = "asciitensorboard.cli:main"
+sparkline = "sparkline.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/example/asciitensorboard"
-Issues = "https://github.com/example/asciitensorboard/issues"
+Homepage = "https://github.com/example/sparkline"
+Issues = "https://github.com/example/sparkline/issues"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["asciitensorboard*"]
+include = ["sparkline*"]
 
 [tool.ruff]
 line-length = 100

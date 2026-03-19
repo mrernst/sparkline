@@ -1,22 +1,22 @@
 """
-CLI entry point for asciitensorboard.
+CLI entry point for sparkline.
 
 Usage examples
 --------------
   # TensorBoard
-  asciitb ./runs/
-  asciitb ./runs/ --tags loss acc --smoothing 0.6
-  asciitb ./runs/ --run my-experiment --group-by run
+  sparkline ./runs/
+  sparkline ./runs/ --tags loss acc --smoothing 0.6
+  sparkline ./runs/ --run my-experiment --group-by run
 
   # W&B (API)
-  asciitb --wandb my-team/my-project
-  asciitb --wandb my-team/my-project --max-runs 5 --tags train/loss
+  sparkline --wandb my-team/my-project
+  sparkline --wandb my-team/my-project --max-runs 5 --tags train/loss
 
   # W&B (local offline)
-  asciitb --wandb ./wandb/
+  sparkline --wandb ./wandb/
 
   # Watch mode: refresh every N seconds
-  asciitb ./runs/ --watch 5
+  sparkline ./runs/ --watch 5
 """
 
 from __future__ import annotations
@@ -27,8 +27,8 @@ from pathlib import Path
 from typing import List, Optional, Tuple
 
 import click
-from asciitensorboard.plotter import MetricPlotter
-from asciitensorboard.utils import setup_logging
+from sparkline.plotter import MetricPlotter
+from sparkline.utils import setup_logging
 
 try:
     from rich.console import Console
@@ -52,25 +52,25 @@ HELP_EPILOG = """
 \b
 Examples:
   # Read a TensorBoard log directory
-  asciitb ./runs/
+  sparkline ./runs/
 
   # Filter to specific metrics (glob patterns OK)
-  asciitb ./runs/ --tags "train/*" --tags val/loss
+  sparkline ./runs/ --tags "train/*" --tags val/loss
 
   # Apply EMA smoothing (0.0–1.0, higher = smoother)
-  asciitb ./runs/ --smoothing 0.8
+  sparkline ./runs/ --smoothing 0.8
 
   # Group by run instead of by metric
-  asciitb ./runs/ --group-by run
+  sparkline ./runs/ --group-by run
 
   # Fetch from W&B cloud
-  asciitb --wandb my-entity/my-project --max-runs 5
+  sparkline --wandb my-entity/my-project --max-runs 5
 
   # Read local W&B offline directory
-  asciitb --wandb ./wandb/
+  sparkline --wandb ./wandb/
 
   # Auto-refresh every 10 seconds
-  asciitb ./runs/ --watch 10
+  sparkline ./runs/ --watch 10
 """
 
 
@@ -80,7 +80,7 @@ Examples:
 
 
 @click.command(
-    name="asciitb",
+    name="sparkline",
     epilog=HELP_EPILOG,
     context_settings={"help_option_names": ["-h", "--help"], "max_content_width": 100},
 )
@@ -157,7 +157,7 @@ Examples:
 )
 # --- Misc -------------------------------------------------------------------
 @click.option("--verbose", "-v", is_flag=True, help="Enable debug logging.")
-@click.version_option(package_name="asciitensorboard", prog_name="asciitb")
+@click.version_option(package_name="sparkline", prog_name="sparkline")
 def main(
     log_dir: Optional[str],
     wandb_source: Optional[str],
@@ -175,7 +175,7 @@ def main(
     """
     \b
     ╔══════════════════════════════════╗
-    ║      a s c i i t e n s o r b o a r d      ║
+    ║               s p a r k l i n e              ║
     ║  TensorBoard & W&B in your terminal  ║
     ╚══════════════════════════════════╝
 
@@ -204,7 +204,7 @@ def main(
 
     def _do_plot() -> None:
         if wandb_source is not None:
-            from asciitensorboard.readers.wandb import WandbReader
+            from sparkline.readers.wandb import WandbReader
             reader = WandbReader(
                 source=wandb_source,
                 run_ids=run_list,
@@ -217,7 +217,7 @@ def main(
                 console.print(f"[red]Error:[/red] {exc}")
                 sys.exit(1)
         else:
-            from asciitensorboard.readers.tensorboard import TensorBoardReader
+            from sparkline.readers.tensorboard import TensorBoardReader
             try:
                 reader = TensorBoardReader(
                     log_dir=log_dir,

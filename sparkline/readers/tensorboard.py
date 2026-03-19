@@ -12,7 +12,7 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Dict, Generator, List, Optional, Tuple
 
-from asciitensorboard.utils import MetricSeries, logger
+from sparkline.utils import MetricSeries, logger
 
 
 class TensorBoardReader:

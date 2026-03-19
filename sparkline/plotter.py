@@ -9,7 +9,7 @@ from __future__ import annotations
 import math
 from typing import Dict, List, Optional, Tuple
 
-from asciitensorboard.utils import MetricSeries, abbreviate, format_value
+from sparkline.utils import MetricSeries, abbreviate, format_value
 
 # Plotext colour palette cycled for multiple runs / tags
 _COLOURS = [
@@ -271,7 +271,7 @@ class MetricPlotter:
         self.console.print(
             Panel(
                 Text.from_markup(subtitle, justify="center"),
-                title="[bold]asciitensorboard[/bold]",
+                title="[bold]sparkline[/bold]",
                 border_style="bright_blue",
             )
         )
